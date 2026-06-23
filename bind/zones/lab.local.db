@@ -1,0 +1,13 @@
+$TTL 60
+@   IN  SOA  ns1.lab.local. admin.lab.local. (
+        2024010101 3600 900 604800 60 )
+
+@       IN  NS   ns1.lab.local.
+ns1     IN  A    10.10.0.10
+www     IN  A    10.10.0.50
+mail    IN  A    10.10.0.51
+vpn     IN  A    10.10.0.52
+dev     IN  A    10.10.0.53
+admin   IN  A    10.10.0.54
+db      IN  A    10.10.0.55
+secret  IN  TXT  "internal-api-key=abc123"

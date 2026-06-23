@@ -1,0 +1,35 @@
+services:
+  ns1:                          # authoritative / recursive DNS (BIND9)
+    image: ubuntu/bind9:latest
+    container_name: ns1
+    volumes:
+      - ./bind:/etc/bind
+    ports:
+      - "5353:53/udp"
+      - "5353:53/tcp"
+    networks:
+      dnslab:
+        ipv4_address: 10.10.0.10
+
+  attacker:
+    image: kalilinux/kali-rolling
+    container_name: attacker
+    tty: true
+    networks:
+      dnslab:
+        ipv4_address: 10.10.0.20
+
+  victim:
+    image: ubuntu:22.04
+    container_name: victim
+    tty: true
+    networks:
+      dnslab:
+        ipv4_address: 10.10.0.30
+
+networks:
+  dnslab:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/24
